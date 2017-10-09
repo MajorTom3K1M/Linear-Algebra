@@ -25,6 +25,7 @@ public class GuassianSeidel {
                 if (Math.abs(xNew[i] - xOld[i]) > EPSILON) {
                     errorValue[i] = Math.abs(xNew[i] - xOld[i]);
                     xOld[i] = xNew[i];
+                    stop = false;
                 } else {
                     stop = true;
                 }
