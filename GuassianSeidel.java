@@ -1,15 +1,17 @@
 public class GuassianSeidel {
     public static void main(String [] args){
-        double[][] A = {{1,-3,2,1},
-                        {2,-6,1,4},
-                        {0,-1,1,1}};
-        double[] b = {-4,1,12,0};
+        double[][] A = {{4,-1,1},
+                        {1,1,-1},
+                        {1,-1,2}};
+        double[] b = {1,4,4};
+
         gaussian_Seidel(A,b);
     }
     public static void gaussian_Seidel (double [][] A , double [] b){
         int count = 0;
+        int checkX = 0;
         boolean stop = false;
-        double EPSILON = 1e-8;
+        double EPSILON = 0.1;
         double sum = 0;
         double xNew[] = new double[b.length];
         double xOld[] = new double[b.length];
@@ -22,14 +24,19 @@ public class GuassianSeidel {
                 }
                 xNew[i] = (b[i] - sum) / (A[i][i]);
                 sum = 0;
-                if (Math.abs(xNew[i] - xOld[i]) > EPSILON) {
-                    errorValue[i] = Math.abs(xNew[i] - xOld[i]);
-                    xOld[i] = xNew[i];
-                    stop = false;
-                } else {
+                
+                errorValue[i] = Math.abs(xNew[i] - xOld[i]);
+                xOld[i] = xNew[i];
+            }
+            for(int j = 0 ; j < A.length ; j++ ){
+                if(errorValue[j] < EPSILON ){
+                    checkX++;
+                }
+                if(checkX == A.length){
                     stop = true;
                 }
             }
+            checkX = 0;
             count++;
             System.out.println("Iteration"+ count +" : " + toString(xNew) + "\tError : " +  toString(errorValue));
         }
