@@ -11,7 +11,7 @@ public class GuassianSeidel {
         int count = 0;
         int checkX = 0;
         boolean stop = false;
-        double EPSILON = 0.1;
+        double EPSILON = 1e-8;
         double sum = 0;
         double xNew[] = new double[b.length];
         double xOld[] = new double[b.length];
